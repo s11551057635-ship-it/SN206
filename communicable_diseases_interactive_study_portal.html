@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communicable Diseases Master Quiz - Englewood Health Dept</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col transition-colors duration-200">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-brand-600 text-white p-2.5 rounded-xl shadow-md">
+                    <i class="fa-solid fa-virus-covid text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight text-slate-900 dark:text-white">Communicable Diseases Portal</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Englewood Health Dept • 100-Question Study Exam</p>
+                </div>
+            </div>
+
+            <!-- Top Controls -->
+            <div class="flex items-center space-x-3">
+                <button id="themeToggle" class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-moon text-lg dark:hidden"></i>
+                    <i class="fa-solid fa-sun text-lg hidden dark:inline"></i>
+                </button>
+                <button id="resetAppBtn" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-red-600 dark:text-slate-300 dark:hover:text-red-400 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> Reset Progress
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- SETUP SCREEN (MODE SELECTION) -->
+        <div id="setupScreen" class="max-w-4xl mx-auto space-y-8 py-4">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-brand-700 via-brand-600 to-indigo-700 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10 space-y-3">
+                    <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold tracking-wide uppercase">Interactive Health Education</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold">Master Communicable Diseases Knowledge</h2>
+                    <p class="text-brand-100 text-sm sm:text-base max-w-2xl">
+                        Test your comprehension of symptoms, transmission modes, prevention strategies, and treatments for 16 key infectious diseases based on the official Englewood, NJ Public Health guide.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-4 text-xs font-medium text-brand-100">
+                        <span class="flex items-center"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> 100 Questions</span>
+                        <span class="flex items-center"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> Detailed Rationales</span>
+                        <span class="flex items-center"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> CDC Guidelines</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Setup Options -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Mode 1: Full Exam -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Full Mastery Exam</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Take all 100 questions in sequential order. Ideal for a comprehensive self-assessment.</p>
+                    </div>
+                    <button onclick="startQuiz('full')" class="w-full py-2.5 px-4 bg-brand-600 hover:bg-brand-700 text-white rounded-lg font-semibold text-sm shadow transition">
+                        Start 100 Questions
+                    </button>
+                </div>
+
+                <!-- Mode 2: Custom Length -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Quick Practice Test</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Select a shorter, randomized session to practice key concepts on the go.</p>
+                        <div class="mt-3">
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Number of Questions:</label>
+                            <select id="quickLength" class="w-full text-xs p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-800 dark:text-slate-200">
+                                <option value="10">10 Questions (Quick Review)</option>
+                                <option value="25" selected>25 Questions (Standard Practice)</option>
+                                <option value="50">50 Questions (Half Exam)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="startQuiz('quick')" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm shadow transition">
+                        Start Practice Session
+                    </button>
+                </div>
+
+                <!-- Mode 3: Topic Focused -->
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-filter"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Topic Specific Quiz</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Focus exclusively on specific diseases (e.g., Rabies, TB, Tick-Borne, COVID-19).</p>
+                        <div class="mt-3">
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Select Disease Module:</label>
+                            <select id="topicSelect" class="w-full text-xs p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-800 dark:text-slate-200">
+                                <option value="All">All Topics Mixed</option>
+                                <option value="Chickenpox / Shingles">Chickenpox / Shingles</option>
+                                <option value="COVID-19">COVID-19</option>
+                                <option value="Ebola">Ebola</option>
+                                <option value="Hepatitis B">Hepatitis B</option>
+                                <option value="Hepatitis C">Hepatitis C</option>
+                                <option value="HIV / AIDS">HIV / AIDS</option>
+                                <option value="Influenza / Flu">Influenza / Flu</option>
+                                <option value="Mpox">Mpox (Monkeypox)</option>
+                                <option value="Mumps">Mumps</option>
+                                <option value="Pink Eye">Pink Eye (Conjunctivitis)</option>
+                                <option value="Pertussis">Pertussis (Whooping Cough)</option>
+                                <option value="Rabies">Rabies</option>
+                                <option value="Tick-Borne Disease">Tick-Borne Diseases</option>
+                                <option value="Tuberculosis">Tuberculosis (TB)</option>
+                                <option value="Viral Hepatitis">Viral Hepatitis</option>
+                                <option value="West Nile Virus">West Nile Virus (WNV)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="startQuiz('topic')" class="w-full py-2.5 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold text-sm shadow transition">
+                        Start Topic Test
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Settings Box -->
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 flex flex-wrap gap-6 items-center justify-between text-xs sm:text-sm">
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="instantFeedbackToggle" class="w-4 h-4 text-brand-600 rounded border-slate-300 focus:ring-brand-500" checked>
+                    <label for="instantFeedbackToggle" class="text-slate-700 dark:text-slate-300 font-medium">Show immediate feedback & rationale after answering</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="shuffleOptionsToggle" class="w-4 h-4 text-brand-600 rounded border-slate-300 focus:ring-brand-500">
+                    <label for="shuffleOptionsToggle" class="text-slate-700 dark:text-slate-300 font-medium">Randomize question sequence</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVE QUIZ SCREEN -->
+        <div id="quizScreen" class="hidden space-y-6">
+            <!-- Top Controls Bar -->
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-4">
+                    <span id="questionCounter" class="text-xs sm:text-sm font-bold bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 px-3 py-1.5 rounded-lg border border-brand-200 dark:border-brand-800">
+                        Question 1 of 100
+                    </span>
+                    <span id="diseaseBadge" class="text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded-md">
+                        General
+                    </span>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Timer -->
+                    <div class="flex items-center space-x-1.5 text-xs font-mono font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 px-3 py-1.5 rounded-lg">
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="timerDisplay">00:00</span>
+                    </div>
+
+                    <!-- Bookmark Button -->
+                    <button id="flagBtn" onclick="toggleFlagCurrentQuestion()" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-amber-500 transition" title="Flag for Review">
+                        <i class="fa-regular fa-bookmark text-base"></i>
+                    </button>
+
+                    <!-- End Test Early Button -->
+                    <button onclick="finishQuiz()" class="text-xs font-bold px-3 py-1.5 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800/50 rounded-lg hover:bg-red-100 transition">
+                        Finish Test
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                <div id="progressBar" class="bg-brand-600 h-full w-0 transition-all duration-300"></div>
+            </div>
+
+            <!-- Main Layout: Question Box + Sidebar Navigator -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Question Area (3 cols on desktop) -->
+                <div class="lg:col-span-3 space-y-6">
+                    <div class="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+                        <!-- Question Text -->
+                        <h3 id="questionText" class="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-relaxed">
+                            Loading question...
+                        </h3>
+
+                        <!-- Answer Options Grid -->
+                        <div id="optionsContainer" class="space-y-3">
+                            <!-- Dynamically loaded options -->
+                        </div>
+
+                        <!-- Instant Rationale Box -->
+                        <div id="rationaleBox" class="hidden p-4 rounded-xl border text-sm space-y-2">
+                            <div class="flex items-center space-x-2 font-bold" id="rationaleHeader">
+                                <i id="rationaleIcon" class="fa-solid"></i>
+                                <span id="rationaleTitle">Explanation</span>
+                            </div>
+                            <p id="rationaleText" class="text-slate-700 dark:text-slate-300 leading-relaxed text-xs sm:text-sm"></p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Footer -->
+                    <div class="flex items-center justify-between">
+                        <button id="prevBtn" onclick="navigateQuestion(-1)" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-semibold text-xs sm:text-sm transition flex items-center space-x-2">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Previous</span>
+                        </button>
+
+                        <button id="nextBtn" onclick="navigateQuestion(1)" class="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg font-semibold text-xs sm:text-sm shadow transition flex items-center space-x-2">
+                            <span>Next Question</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sidebar Navigator Grid (1 col) -->
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4 h-fit">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Question Map</h4>
+                        <span id="answeredCountBadge" class="text-xs font-semibold text-slate-600 dark:text-slate-400">0 / 100 Answered</span>
+                    </div>
+
+                    <div id="questionGrid" class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2 max-h-80 overflow-y-auto custom-scrollbar p-1">
+                        <!-- Dynamically filled grid buttons -->
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="pt-3 border-t border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></span>
+                            <span>Unanswered</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-600"></span>
+                            <span>Answered</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                            <span>Flagged</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            <span>Correct</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS / REVIEW SCREEN -->
+        <div id="resultsScreen" class="hidden max-w-5xl mx-auto space-y-8">
+            <!-- Score Overview Card -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-6 sm:p-8 space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="text-xs uppercase tracking-widest font-bold text-brand-600 dark:text-brand-400">Assessment Complete</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Your Performance Summary</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center py-4">
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Final Score</div>
+                        <div id="finalScoreDisplay" class="text-3xl sm:text-4xl font-extrabold text-brand-600 dark:text-brand-400 mt-1">0%</div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Correct Answers</div>
+                        <div id="correctCountDisplay" class="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-1">0 / 0</div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Time Taken</div>
+                        <div id="totalTimeDisplay" class="text-3xl sm:text-4xl font-extrabold text-purple-600 dark:text-purple-400 mt-1">00:00</div>
+                    </div>
+                </div>
+
+                <!-- Topic Breakdown -->
+                <div class="space-y-3">
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">Topic-by-Topic Mastery</h4>
+                    <div id="categoryBreakdownContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <!-- Dynamically generated breakdown -->
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-4 justify-center pt-4">
+                    <button onclick="retakeQuiz()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm rounded-xl shadow transition">
+                        <i class="fa-solid fa-arrow-rotate-left mr-2"></i> Retake Test
+                    </button>
+                    <button onclick="showSetupScreen()" class="px-6 py-2.5 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-semibold text-sm rounded-xl transition">
+                        <i class="fa-solid fa-house mr-2"></i> Return to Setup
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Question Review Section -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white">Detailed Item Review</h3>
+                    <div class="flex items-center space-x-2 text-xs">
+                        <button onclick="filterReview('all')" id="filterAllBtn" class="px-3 py-1 bg-brand-600 text-white rounded-lg font-medium">All</button>
+                        <button onclick="filterReview('incorrect')" id="filterIncorrectBtn" class="px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium">Incorrect</button>
+                        <button onclick="filterReview('flagged')" id="filterFlaggedBtn" class="px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium">Flagged</button>
+                    </div>
+                </div>
+
+                <div id="reviewItemsContainer" class="space-y-4">
+                    <!-- Detailed question feedback rendered here -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-4 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+            Based on official Englewood Health Department & CDC Communicable Diseases Information Guide. For educational evaluation only.
+        </div>
+    </footer>
+
+    <!-- SCRIPT WITH ALL 100 QUESTIONS & FULL APP LOGIC -->
+    <script>
+        // --- 100 QUESTION DATABASE ---
+        const ALL_QUESTIONS = [
+            // CHICKENPOX / SHINGLES (1-6)
+            {
+                id: 1,
+                topic: "Chickenpox / Shingles",
+                question: "What pathogen causes both Chickenpox and Shingles?",
+                options: ["Herpes Simplex Virus 1", "Varicella-Zoster Virus (VZV)", "Epstein-Barr Virus", "Cytomegalovirus"],
+                answer: 1,
+                rationale: "According to the guide, Chickenpox and Shingles are caused by the varicella-zoster virus (VZV)."
+            },
+            {
+                id: 2,
+                topic: "Chickenpox / Shingles",
+                question: "Where on the body does the itchy, blister-like rash of chickenpox typically first appear?",
+                options: ["On the palms and soles of the feet", "On the chest, back, and face", "On the lower legs and arms", "In the mouth and throat"],
+                answer: 1,
+                rationale: "Chickenpox causes an itchy, blister-like rash that first appears on the chest, back, and face, then spreads over the entire body."
+            },
+            {
+                id: 3,
+                topic: "Chickenpox / Shingles",
+                question: "At what point does an infected person STOP being contagious with chickenpox?",
+                options: ["24 hours after taking antivirals", "When the fever subsides completely", "Until all of the blisters have formed scabs", "7 days after the first blister appears"],
+                answer: 2,
+                rationale: "Chickenpox doesn't stop spreading until all of the blisters have formed scabs."
+            },
+            {
+                id: 4,
+                topic: "Chickenpox / Shingles",
+                question: "According to CDC recommendations, at what ages should children receive the two doses of chickenpox vaccine?",
+                options: ["At birth and at 6 months", "12-15 months and 4-6 years", "2 years and 10 years", "6 months and 12 years"],
+                answer: 1,
+                rationale: "The first dose should be given at 12-15 months and the second dose between ages 4-6 years."
+            },
+            {
+                id: 5,
+                topic: "Chickenpox / Shingles",
+                question: "How many days BEFORE symptoms appear can a person infected with chickenpox spread the virus?",
+                options: ["1 to 2 days", "5 to 7 days", "10 to 14 days", "Chickenpox is only contagious after symptoms appear"],
+                answer: 0,
+                rationale: "It can spread 1 to 2 days before the infected person has symptoms."
+            },
+            {
+                id: 6,
+                topic: "Chickenpox / Shingles",
+                question: "Which of the following is listed as a potential serious complication of chickenpox?",
+                options: ["Liver cirrhosis", "Encephalitis and pneumonia", "Permanent blindness", "Kidney failure"],
+                answer: 1,
+                rationale: "In some cases, chickenpox can lead to skin infections, dehydration, pneumonia, encephalitis, and rarely death."
+            },
+
+            // COVID-19 (7-14)
+            {
+                id: 7,
+                topic: "COVID-19",
+                question: "What is the specific virus that causes COVID-19?",
+                options: ["SARS-CoV-1", "MERS-CoV", "SARS-CoV-2", "Influenza A H1N1"],
+                answer: 2,
+                rationale: "COVID-19 is a disease caused by a virus named SARS-CoV-2."
+            },
+            {
+                id: 8,
+                topic: "COVID-19",
+                question: "What is the typical timeframe for COVID-19 symptoms to appear following exposure?",
+                options: ["1 to 3 hours", "2 to 14 days", "15 to 30 days", "1 to 3 months"],
+                answer: 1,
+                rationale: "Possible symptoms of COVID-19 may appear 2-14 days after exposure."
+            },
+            {
+                id: 9,
+                topic: "COVID-19",
+                question: "How does COVID-19 primarily spread between people?",
+                options: ["Through contaminated food and water supplies", "Through insect bites like mosquitoes", "When an infected person breathes out droplets and small particles containing virus", "Through contact with soil"],
+                answer: 2,
+                rationale: "COVID-19 spreads when an infected person breathes out droplets and very small particles that contain the virus."
+            },
+            {
+                id: 10,
+                topic: "COVID-19",
+                question: "What is the official term given to post-infection conditions that linger after a COVID-19 illness?",
+                options: ["Chronic Fatigue Syndrome", "Post-COVID Conditions or 'Long COVID'", "Post-Viral Encephalitis", "Subacute Respiratory Syndrome"],
+                answer: 1,
+                rationale: "Some people, including those with minor or no symptoms, develop Post-COVID Conditions – also called 'Long COVID'."
+            },
+            {
+                id: 11,
+                topic: "COVID-19",
+                question: "What guidance is given regarding contact between infected humans and animals for COVID-19?",
+                options: ["Animals spread COVID-19 to humans very rapidly", "Infected humans should avoid contact with animals during infection", "Pets should be vaccinated against COVID-19 immediately", "Animals are completely immune to SARS-CoV-2"],
+                answer: 1,
+                rationale: "The virus can spread from people to animals during close contact. People with suspected or confirmed COVID-19 should avoid contact with animals."
+            },
+            {
+                id: 12,
+                topic: "COVID-19",
+                question: "Which sensory symptom is uniquely listed as a potential sign of COVID-19 infection?",
+                options: ["Loss of vision", "New loss of taste or smell", "Loss of hearing", "Numbness in fingertips"],
+                answer: 1,
+                rationale: "New loss of taste or smell is specifically listed among the common signs and symptoms of COVID-19."
+            },
+            {
+                id: 13,
+                topic: "COVID-19",
+                question: "Can an individual who has NO symptoms of COVID-19 still transmit the virus to others?",
+                options: ["No, only symptomatic individuals shed the virus", "Yes, anyone infected can spread it, even without symptoms", "Only if they have Long COVID", "Only through blood transmission"],
+                answer: 1,
+                rationale: "Anyone infected with COVID-19 can spread it, even if they do NOT have symptoms."
+            },
+            {
+                id: 14,
+                topic: "COVID-19",
+                question: "According to the Englewood Health guide, approximately how many COVID-19 deaths have occurred in the United States?",
+                options: ["Over 100,000", "Over 500,000", "Over 1,000,000", "Over 5,000,000"],
+                answer: 2,
+                rationale: "The document explicitly notes that 'Over one million people have died from COVID-19 in the United States.'"
+            },
+
+            // EBOLA (15-22)
+            {
+                id: 15,
+                topic: "Ebola",
+                question: "In what geographic region are the viruses that cause Ebola disease primarily found?",
+                options: ["Southeast Asia", "Sub-Saharan Africa", "Central America", "Eastern Europe"],
+                answer: 1,
+                rationale: "Ebola disease is caused by ebolaviruses found primarily in sub-Saharan Africa."
+            },
+            {
+                id: 16,
+                topic: "Ebola",
+                question: "What is the incubation period for Ebola disease (time from contact to symptom appearance)?",
+                options: ["1 to 2 days", "2 to 21 days", "30 to 60 days", "6 months"],
+                answer: 1,
+                rationale: "Symptoms may appear anywhere from 2 to 21 days after contact with an ebolavirus."
+            },
+            {
+                id: 17,
+                topic: "Ebola",
+                question: "How does the clinical progression of Ebola disease typically evolve?",
+                options: ["From 'wet' symptoms (vomiting) to 'dry' symptoms (fever)", "From 'dry' symptoms (fever, aches) to 'wet' symptoms (diarrhea, vomiting)", "From skin rashes directly to coma", "From respiratory cough to kidney failure"],
+                answer: 1,
+                rationale: "The course of illness progresses from 'dry' symptoms (fever, aches, fatigue) to 'wet' symptoms (diarrhea and vomiting) as the person becomes sicker."
+            },
+            {
+                id: 18,
+                topic: "Ebola",
+                question: "Which FDA-approved single-dose vaccine is available for protection against the *Zaire ebolavirus* species?",
+                options: ["rVSV-ZEBOV (Ervebo)", "Shingrix", "Engerix-B", "Gardasil"],
+                answer: 0,
+                rationale: "The Ebola vaccine rVSV-ZEBOV (called Ervebo) is an FDA-approved single-dose vaccine protective against *Zaire ebolavirus*."
+            },
+            {
+                id: 19,
+                topic: "Ebola",
+                question: "Which specific wild animals are identified as potential vectors for spreading Ebola to humans?",
+                options: ["Raccoons and skunks", "Fruit bats and nonhuman primates", "Rats and field mice", "Mosquitoes and ticks"],
+                answer: 1,
+                rationale: "People can get Ebola through contact with infected animals such as fruit bats or nonhuman primates (apes/monkeys)."
+            },
+            {
+                id: 20,
+                topic: "Ebola",
+                question: "Which populations are at the HIGHEST risk of contracting Ebola disease?",
+                options: ["Schoolchildren in urban areas", "Health workers and family members caring for patients without proper infection control", "Construction workers", "Pregnant women only"],
+                answer: 1,
+                rationale: "Health workers and family members who do not use proper infection control while caring for patients are at highest risk."
+            },
+            {
+                id: 21,
+                topic: "Ebola",
+                question: "Ebola virus can be transmitted through semen from a recovered male until testing shows what?",
+                options: ["30 days have passed", "The virus is completely gone from his semen", "He receives the Ervebo vaccine", "He shows no fever for 14 days"],
+                answer: 1,
+                rationale: "Guidance states to avoid contact with semen from a recovered man until testing shows that the virus is gone from his semen."
+            },
+            {
+                id: 22,
+                topic: "Ebola",
+                question: "Which of the following is classified as a 'primary symptom' involving bleeding in Ebola patients?",
+                options: ["Unexplained hemorrhaging, bleeding or bruising", "Heavy nasal drainage", "Internal calcification", "Hair loss"],
+                answer: 0,
+                rationale: "Unexplained hemorrhaging, bleeding or bruising is listed as a primary symptom of Ebola."
+            },
+
+            // HEPATITIS B (23-28)
+            {
+                id: 23,
+                topic: "Hepatitis B",
+                question: "Hepatitis B is an infection that primarily attacks which organ?",
+                options: ["Lungs", "Kidneys", "Liver", "Heart"],
+                answer: 2,
+                rationale: "Hepatitis B is a vaccine-preventable liver infection caused by HBV."
+            },
+            {
+                id: 24,
+                topic: "Hepatitis B",
+                question: "How is Hepatitis B transmitted between individuals?",
+                options: ["Through airborne coughing and sneezing", "When infected blood, semen, or body fluids enter the body of an uninfected person", "Through contaminated food or drinking water", "Through mosquito bites"],
+                answer: 1,
+                rationale: "Hepatitis B is spread when blood, semen, or other body fluids from an infected person enter the body of someone who is not infected."
+            },
+            {
+                id: 25,
+                topic: "Hepatitis B",
+                question: "What is a classic visual sign of liver disease associated with Hepatitis B?",
+                options: ["Jaundice (yellowing of skin/eyes)", "Red rash on chest", "Purple spots on eyelids", "White patches on tongue"],
+                answer: 0,
+                rationale: "Jaundice is a classic sign of liver disease/hepatitis B symptom."
+            },
+            {
+                id: 26,
+                topic: "Hepatitis B",
+                question: "What CDC recommendation exists for Hepatitis B screening among adults?",
+                options: ["Screen all adults every 5 years", "Screen all adults 18 years and older at least once in their lifetime", "Screen only healthcare workers", "Screening is only necessary during pregnancy"],
+                answer: 1,
+                rationale: "The CDC recommends all adults 18 years and older get screened for Hepatitis B at least once in their lifetime."
+            },
+            {
+                id: 27,
+                topic: "Hepatitis B",
+                question: "Which age group of adults should routinely receive the Hepatitis B vaccine?",
+                options: ["Only adults over 65", "All adults aged 18-59", "Only infants and toddlers", "Adults aged 18-25 only"],
+                answer: 1,
+                rationale: "All adults aged 18-59 should receive the vaccine."
+            },
+            {
+                id: 28,
+                topic: "Hepatitis B",
+                question: "Can Hepatitis B be transmitted from a mother to her child during pregnancy or delivery?",
+                options: ["No, the placenta blocks HBV transmission", "Yes, pregnancy and delivery are documented transmission routes", "Only if delivery occurs via C-section", "Only if the mother has Hepatitis C as well"],
+                answer: 1,
+                rationale: "Hepatitis B transmission can occur during pregnancy or delivery."
+            },
+
+            // HEPATITIS C (29-33)
+            {
+                id: 29,
+                topic: "Hepatitis C",
+                question: "What is the primary mode of transmission for Hepatitis C?",
+                options: ["Sharing eating utensils", "Contact with infected blood, most commonly through sharing drug injection equipment", "Casual skin-to-skin touch", "Respiratory droplets"],
+                answer: 1,
+                rationale: "Most people become infected with Hepatitis C by sharing needles or other equipment used to prepare and inject drugs."
+            },
+            {
+                id: 30,
+                topic: "Hepatitis C",
+                question: "Is there a vaccine currently available to prevent Hepatitis C?",
+                options: ["Yes, given as a 3-dose series", "Yes, recommended for all teenagers", "No, there is currently NO vaccine for Hepatitis C", "Yes, but only in Europe"],
+                answer: 2,
+                rationale: "The text explicitly states: 'There is no vaccine for Hepatitis C so the best way to prevent it is to avoid behaviors that can lead to infection.'"
+            },
+            {
+                id: 31,
+                topic: "Hepatitis C",
+                question: "For more than half of those infected with Hepatitis C, what long-term health condition can develop?",
+                options: ["Complete loss of hearing", "Chronic infection that can lead to liver cancer", "Autoimmune type 1 diabetes", "Chronic bronchitis"],
+                answer: 1,
+                rationale: "For more than half of those infected, it becomes a long-term chronic infection and can result in serious health problems such as liver cancer."
+            },
+            {
+                id: 32,
+                topic: "Hepatitis C",
+                question: "How effective are modern antiviral treatments for curing Hepatitis C, and how long does treatment usually take?",
+                options: ["Treatments only manage symptoms and take 5 years", "Treatments can cure most infections in 8 to 12 weeks", "Treatments cure 10% of cases in 2 weeks", "Hepatitis C cannot be cured"],
+                answer: 1,
+                rationale: "Getting tested is important because treatments can cure most infections in 8 to 12 weeks!"
+            },
+            {
+                id: 33,
+                topic: "Hepatitis C",
+                question: "Why is chronic Hepatitis C often called a silent infection?",
+                options: ["It prevents patients from speaking", "Infected individuals often have NO symptoms until advanced liver disease develops", "It causes no detectable liver damage", "It only affects people during sleep"],
+                answer: 1,
+                rationale: "People infected with chronic Hepatitis C can often have no symptoms. When symptoms appear, it is generally a sign of advanced liver disease."
+            },
+
+            // HIV / AIDS (34-42)
+            {
+                id: 34,
+                topic: "HIV / AIDS",
+                question: "What body system does HIV target and weaken?",
+                options: ["Nervous system", "Immune system", "Digestive system", "Musculoskeletal system"],
+                answer: 1,
+                rationale: "HIV (human immunodeficiency virus) is a virus that attacks the body's immune system."
+            },
+            {
+                id: 35,
+                topic: "HIV / AIDS",
+                question: "Which of the following fluids is NOT listed as a carrier for HIV?",
+                options: ["Semen", "Vaginal fluids", "Saliva", "Breast milk"],
+                answer: 2,
+                rationale: "The document lists semen, vaginal fluids, anal mucus, blood, and breast milk as body fluids carrying HIV. Saliva is not listed as a transmission vehicle."
+            },
+            {
+                id: 36,
+                topic: "HIV / AIDS",
+                question: "What is Stage 1 of an untreated HIV infection called?",
+                options: ["Clinical Latency", "Acute HIV Infection", "AIDS", "Asymptomatic Phase"],
+                answer: 1,
+                rationale: "Stage 1 is known as Acute HIV Infection, where people have a large amount of virus in their blood and are very contagious."
+            },
+            {
+                id: 37,
+                topic: "HIV / AIDS",
+                question: "What is another name for Stage 2 HIV infection?",
+                options: ["Acute retroviral syndrome", "Clinical latency or asymptomatic HIV infection", "Advanced AIDS stage", "Immune recovery stage"],
+                answer: 1,
+                rationale: "Stage 2: Chronic HIV Infection is also known as asymptomatic HIV infection or clinical latency."
+            },
+            {
+                id: 38,
+                topic: "HIV / AIDS",
+                question: "Without treatment, how long can Stage 2 (Chronic HIV Infection) typically last?",
+                options: ["1 to 2 months", "6 months", "A decade or longer", "Exactly 20 years"],
+                answer: 2,
+                rationale: "Without treatment, Stage 2 chronic HIV infection may last a decade or longer."
+            },
+            {
+                id: 39,
+                topic: "HIV / AIDS",
+                question: "Without HIV treatment, what is the typical survival time for someone diagnosed with Stage 3 (AIDS)?",
+                options: ["1 month", "Approximately 3 years", "10 years", "15 years"],
+                answer: 1,
+                rationale: "Without HIV treatment, people with AIDS typically only survive about 3 years."
+            },
+            {
+                id: 40,
+                topic: "HIV / AIDS",
+                question: "What medications can be taken by an uninfected individual before or immediately after exposure to prevent acquiring HIV?",
+                options: ["Penicillin and Amoxicillin", "PrEP (pre-exposure) and PEP (post-exposure)", "Ervebo and MMR", "Aspirin and Ibuprofen"],
+                answer: 1,
+                rationale: "PrEP (pre-exposure prophylaxis) and PEP (post-exposure prophylaxis) are preventive medications against HIV."
+            },
+            {
+                id: 41,
+                topic: "HIV / AIDS",
+                question: "How soon after initial HIV infection do most people experience flu-like symptoms?",
+                options: ["24 hours", "2 to 4 weeks", "6 months to 1 year", "Flu-like symptoms never occur in HIV"],
+                answer: 1,
+                rationale: "Most people experience flu-like symptoms within 2-4 weeks after infection."
+            },
+            {
+                id: 42,
+                topic: "HIV / AIDS",
+                question: "Is there currently an effective medical cure that eliminates HIV from the human body completely?",
+                options: ["Yes, a 10-day antibiotic course", "Yes, viral therapy cures it", "No, once a person is infected, they have HIV for life", "Yes, available via blood transfusion"],
+                answer: 2,
+                rationale: "There is currently no effective cure. Once a person is infected with HIV, they have it for life, though it can be controlled with proper medical care."
+            },
+
+            // INFLUENZA / FLU (43-48)
+            {
+                id: 43,
+                topic: "Influenza / Flu",
+                question: "Influenza is a contagious illness affecting which anatomical areas?",
+                options: ["Liver and spleen", "Nose, throat, and lungs", "Brain and spinal cord", "Eyes and outer skin"],
+                answer: 1,
+                rationale: "Flu is a contagious respiratory illness caused by influenza viruses that infect the nose, throat, and sometimes the lungs."
+            },
+            {
+                id: 44,
+                topic: "Influenza / Flu",
+                question: "How do influenza viruses primarily spread from person to person?",
+                options: ["Through tiny droplets when an infected person coughs, sneezes, or talks", "Through contaminated drinking water", "Through blood transfusions", "Through direct hair-to-hair contact"],
+                answer: 0,
+                rationale: "Flu viruses mainly spread through tiny droplets made when an infected person coughs, sneezes, or talks."
+            },
+            {
+                id: 45,
+                topic: "Influenza / Flu",
+                question: "Which symptoms are noted as being more common in children infected with influenza compared to adults?",
+                options: ["Chest tightness and wheezing", "Vomiting and diarrhea", "Loss of vision", "Joint stiffness"],
+                answer: 1,
+                rationale: "Vomiting and diarrhea are listed as symptoms that are 'more common in children'."
+            },
+            {
+                id: 46,
+                topic: "Influenza / Flu",
+                question: "What is recommended as the BEST way to reduce the risk of seasonal flu and its serious complications?",
+                options: ["Taking daily vitamin C", "Getting vaccinated each year", "Wearing gloves outdoors at all times", "Using antibacterial throat spray"],
+                answer: 1,
+                rationale: "The best way to reduce the risk of seasonal flu and its potentially serious complications is to get vaccinated each year."
+            },
+            {
+                id: 47,
+                topic: "Influenza / Flu",
+                question: "How do flu symptoms typically begin?",
+                options: ["Gradually over 3 to 4 weeks", "Suddenly", "Only at night time", "Starting with a high skin rash"],
+                answer: 1,
+                rationale: "Symptoms usually begin suddenly."
+            },
+            {
+                id: 48,
+                topic: "Influenza / Flu",
+                question: "Can flu viruses be transmitted by touching a surface contaminated with the virus?",
+                options: ["No, flu viruses die instantly on surfaces", "Yes, by touching a contaminated surface and then touching one's mouth, nose, or eyes", "Only if the surface is metallic", "Only in freezing temperatures"],
+                answer: 1,
+                rationale: "It can also be transmitted by touching a contaminated surface or object that has the virus on it and then touching your mouth, nose, or eyes."
+            },
+
+            // MPOX (49-52)
+            {
+                id: 49,
+                topic: "Mpox",
+                question: "What type of pathogen causes Mpox (Monkeypox)?",
+                options: ["Gram-negative bacterium", "Monkeypox virus", "Fungal spore", "Parasitic protozoan"],
+                answer: 1,
+                rationale: "Mpox is a rare disease caused by infection with the monkeypox virus."
+            },
+            {
+                id: 50,
+                topic: "Mpox",
+                question: "What distinctive physical sign is characteristic of Mpox?",
+                options: ["Red lines on fingernails", "Swollen lymph nodes and a rash that often begins on the face and spreads", "Yellowing of the whites of eyes", "Loss of teeth"],
+                answer: 1,
+                rationale: "The virus can cause flu-like symptoms, swollen lymph nodes, and a rash that often begins on the face and spreads to other parts of the body."
+            },
+            {
+                id: 51,
+                topic: "Mpox",
+                question: "Does Mpox spread easily through casual, brief contact in public spaces?",
+                options: ["Yes, it is as contagious as measles", "No, MPX does not spread easily to people without close contact", "Yes, it is entirely airborne across long distances", "It only spreads through contaminated food"],
+                answer: 1,
+                rationale: "MPX does not spread easily to people without close contact."
+            },
+            {
+                id: 52,
+                topic: "Mpox",
+                question: "Which public health agency works in conjunction with NJDOH to monitor Mpox cases?",
+                options: ["World Health Organization only", "CDC (Centers for Disease Control and Prevention)", "American Red Cross", "FDA"],
+                answer: 1,
+                rationale: "The New Jersey Department of Health is working in conjunction with CDC and local health departments."
+            },
+
+            // MUMPS (53-58)
+            {
+                id: 53,
+                topic: "Mumps",
+                question: "Which anatomical structure is primarily affected by the mumps virus?",
+                options: ["Adrenal glands", "Salivary glands", "Thyroid gland", "Lymph nodes in knee"],
+                answer: 1,
+                rationale: "Mumps is a contagious disease that affects the salivary glands."
+            },
+            {
+                id: 54,
+                topic: "Mumps",
+                question: "What virus family does the mumps virus belong to?",
+                options: ["Paramyxovirus (member of Rubulavirus family)", "Retrovirus family", "Flavivirus family", "Orthomyxovirus family"],
+                answer: 0,
+                rationale: "Mumps is caused by a paramyxovirus (member of the Rubulavirus family)."
+            },
+            {
+                id: 55,
+                topic: "Mumps",
+                question: "What is the most common visual clinical feature associated with mumps?",
+                options: ["Dark spots on chest", "Puffy cheeks and a tender, swollen jaw", "Swollen ankles", "Red eyes with pus"],
+                answer: 1,
+                rationale: "The most common symptom associated with mumps are puffy cheeks and a tender, swollen jaw."
+            },
+            {
+                id: 56,
+                topic: "Mumps",
+                question: "What is the typical incubation period before mumps symptoms appear?",
+                options: ["1 to 2 days", "16-18 days", "30 to 45 days", "3 months"],
+                answer: 1,
+                rationale: "Symptoms generally appear 16-18 days after infection."
+            },
+            {
+                id: 57,
+                topic: "Mumps",
+                question: "How long does it take for most people to recover from mumps?",
+                options: ["24 hours", "Within two weeks", "6 months", "1 year"],
+                answer: 1,
+                rationale: "Most people with mumps recover within two weeks."
+            },
+            {
+                id: 58,
+                topic: "Mumps",
+                question: "Mumps prevention is usually combined into which childhood vaccine?",
+                options: ["DTaP vaccine", "MMR vaccine (Measles, Mumps, Rubella)", "PCV13 vaccine", "Hib vaccine"],
+                answer: 1,
+                rationale: "It is often given as part of a combination vaccine that protects against measles, mumps, and rubella (MMR)."
+            },
+
+            // PINK EYE / CONJUNCTIVITIS (59-64)
+            {
+                id: 59,
+                topic: "Pink Eye",
+                question: "What tissue becomes inflamed in a person suffering from pink eye (conjunctivitis)?",
+                options: ["Cornea", "Retina", "Tissue lining the eyelid and white part of the eye (conjunctiva)", "Optic nerve"],
+                answer: 2,
+                rationale: "Pink eye causes inflammation of the tissues lining the eyelid (conjunctiva)."
+            },
+            {
+                id: 60,
+                topic: "Pink Eye",
+                question: "Which of the following CANNOT cause pink eye?",
+                options: ["Allergens", "Bacteria", "Viruses", "Direct sunlight exposure alone"],
+                answer: 3,
+                rationale: "Pink eye is caused by allergens, bacteria, and viruses."
+            },
+            {
+                id: 61,
+                topic: "Pink Eye",
+                question: "When cleaning eye discharge from a person with pink eye, what hygiene rule should be followed?",
+                options: ["Use the same cloth for both eyes to save towels", "Wash discharge twice a day using a fresh cotton ball and throw it away", "Clean eyes with alcohol wipes", "Rinse with unsterilized tap water"],
+                answer: 1,
+                rationale: "Wash any discharge from your eyes twice a day using a fresh cotton ball. Throw away the cotton ball and wash hands."
+            },
+            {
+                id: 62,
+                topic: "Pink Eye",
+                question: "When is a person with bacterial pink eye usually considered less likely to spread the infection?",
+                options: ["After 7 days of complete darkness", "After being on antibiotics for 24 hours or when symptoms resolve", "Immediately after applying eye drops once", "Pink eye remains contagious for 1 month regardless"],
+                answer: 1,
+                rationale: "You're usually less likely to spread the infection if you've been on antibiotics for 24 hours or no longer have symptoms."
+            },
+            {
+                id: 63,
+                topic: "Pink Eye",
+                question: "Which feeling is commonly reported by individuals with pink eye?",
+                options: ["Severe headache behind ears", "Feeling like a foreign body is in the eye or an urge to rub", "Inability to move eyelids", "Double vision"],
+                answer: 1,
+                rationale: "Symptoms include feeling like a foreign body is in the eye(s) or an urge to rub the eye(s)."
+            },
+            {
+                id: 64,
+                topic: "Pink Eye",
+                question: "What personal hygiene habit is strongly advised against when trying to prevent the spread of pink eye?",
+                options: ["Washing hands with soap", "Sharing personal items such as makeup, contact lenses, or towels", "Staying home from school", "Using paper towels"],
+                answer: 1,
+                rationale: "Don't share personal items such as makeup, contact lenses, towels or cups."
+            },
+
+            // PERTUSSIS / WHOOPING COUGH (65-71)
+            {
+                id: 65,
+                topic: "Pertussis",
+                question: "What is the causative agent of pertussis (whooping cough)?",
+                options: ["*Streptococcus pneumoniae*", "*Bordetella pertussis* (bacteria)", "*Haemophilus influenzae*", "*Mycobacterium leprae*"],
+                answer: 1,
+                rationale: "Whooping cough is caused by a bacteria called *Bordetella pertussis*."
+            },
+            {
+                id: 66,
+                topic: "Pertussis",
+                question: "Why is pertussis particularly dangerous for infants?",
+                options: ["It causes immediate bone fractures", "It can cause life-threatening pauses in breathing (apnea) and cyanosis", "It destroys kidney function", "It causes permanent skin discoloration"],
+                answer: 1,
+                rationale: "In infants, early symptoms include life-threatening pauses in breathing (apnea) and turning blue or purple (cyanosis)."
+            },
+            {
+                id: 67,
+                topic: "Pertussis",
+                question: "What clinical symptom gives 'whooping cough' its common name?",
+                options: ["A high-pitched 'whoop' sound after severe coughing fits", "A whistling noise when talking", "A deep grunting sound during sleep", "A barking cough like a dog"],
+                answer: 0,
+                rationale: "Later symptoms include uncontrollable coughing fits that lead to a high-pitched 'whoop' sound."
+            },
+            {
+                id: 68,
+                topic: "Pertussis",
+                question: "Which two vaccines help prevent whooping cough in the United States?",
+                options: ["MMR and Varicella", "DTaP and Tdap", "PCV15 and PPSV23", "HepA and HepB"],
+                answer: 1,
+                rationale: "There are two vaccines in the US that help prevent whooping cough: DTaP and Tdap."
+            },
+            {
+                id: 69,
+                topic: "Pertussis",
+                question: "What medical preventive treatment may be offered to individuals exposed to pertussis?",
+                options: ["Preventative antibiotics", "Steroid injections", "Emergency blood transfusion", "Antiviral nasal sprays"],
+                answer: 0,
+                rationale: "Those who are exposed to whooping cough may be eligible for preventative antibiotics and should talk to their doctor."
+            },
+            {
+                id: 70,
+                topic: "Pertussis",
+                question: "How does pertussis spread from person to person?",
+                options: ["Through the air when an infected person sneezes, coughs, or breathes near someone", "Through direct blood contact", "Through consuming unpasteurized milk", "Through flea bites"],
+                answer: 0,
+                rationale: "The bacteria causing whooping cough can spread easily from person to person through the air."
+            },
+            {
+                id: 71,
+                topic: "Pertussis",
+                question: "How long can pertussis symptoms last if left untreated?",
+                options: ["24 to 48 hours", "3 to 5 days", "Weeks or months", "Exactly 1 year"],
+                answer: 2,
+                rationale: "Whooping cough often starts off like a common cold but can last for weeks or months."
+            },
+
+            // RABIES (72-80)
+            {
+                id: 72,
+                topic: "Rabies",
+                question: "Rabies is a fatal viral disease that targets which critical human system?",
+                options: ["Cardiovascular system", "Central nervous system (brain and spinal cord)", "Digestive tract", "Respiratory system"],
+                answer: 1,
+                rationale: "Rabies is a fatal viral disease that attacks the nervous system (brain and spinal cord)."
+            },
+            {
+                id: 73,
+                topic: "Rabies",
+                question: "Which wild animals account for most rabies cases in North America according to the text?",
+                options: ["Raccoons, skunks, foxes, and bats", "Rats, mice, and squirrels", "Deer and elk", "Pigeons and sparrows"],
+                answer: 0,
+                rationale: "In the United States, rabies is most often seen in raccoons, skunks, foxes, and bats."
+            },
+            {
+                id: 74,
+                topic: "Rabies",
+                question: "Which rodent exception IS known to account for rabies cases among small mammals?",
+                options: ["Hamsters", "Woodchucks (groundhogs)", "Chipmunks", "Guinea pigs"],
+                answer: 1,
+                rationale: "Woodchucks, also known as groundhogs, account for most cases of rabies in rodents."
+            },
+            {
+                id: 75,
+                topic: "Rabies",
+                question: "Which of the following activities WILL NOT transmit rabies?",
+                options: ["An animal bite", "Saliva into an open wound", "Petting a rabid animal or contact with its blood, urine, or feces", "Bat scratch in an open cut"],
+                answer: 2,
+                rationale: "Petting a rabid animal or contact with the blood, urine, or feces of a rabid animal will NOT spread rabies."
+            },
+            {
+                id: 76,
+                topic: "Rabies",
+                question: "Why should medical evaluation for rabies post-exposure prophylaxis occur if a bat is found in a sleeping person's room?",
+                options: ["Bats carry airborne rabies spores", "Bats have small teeth that may not leave visible bite marks on skin", "Bats always bite sleeping humans", "Bats attract other rabid pests"],
+                answer: 1,
+                rationale: "Bats have small teeth that may not leave marks on the skin, so exposure cannot be ruled out when a bat is present in a sleeping person's room."
+            },
+            {
+                id: 77,
+                topic: "Rabies",
+                question: "What distinct physiological symptom occurs in humans with rabies, causing a extreme fear of water?",
+                options: ["Hydrophobia", "Photophobia", "Claustrophobia", "Hemophobia"],
+                answer: 0,
+                rationale: "In humans, rabies symptoms include throat spasms, hydrophobia (fear of water), confusion, and seizures."
+            },
+            {
+                id: 78,
+                topic: "Rabies",
+                question: "What immediate wound care step should be performed if someone is bitten by a potentially rabid animal?",
+                options: ["Apply a tight tourniquet above the wound", "Immediately wash the wound well with soap and water", "Cover with petroleum jelly without washing", "Cuterize the wound"],
+                answer: 1,
+                rationale: "Immediately wash the wound well with soap and water."
+            },
+            {
+                id: 79,
+                topic: "Rabies",
+                question: "If a wild animal that bit someone is trapped, how should it be dispatched for testing?",
+                options: ["Shoot or crush the head", "Trap or kill it WITHOUT damaging its head", "Keep it as a pet for 30 days", "Freeze the whole animal alive"],
+                answer: 1,
+                rationale: "If it is a wild animal, try to trap or kill it without damaging its head (since brain tissue is needed for testing)."
+            },
+            {
+                id: 80,
+                topic: "Rabies",
+                question: "Once clinical symptoms of rabies appear in a human or animal, what is the prognosis?",
+                options: ["Curable with standard antibiotics", "Rabies is almost always fatal", "Full recovery within 14 days", "Resolves spontaneously"],
+                answer: 1,
+                rationale: "The disease rapidly progresses to paralysis, coma, and death. Rabies is almost always fatal."
+            },
+
+            // TICK-BORNE DISEASES (81-89)
+            {
+                id: 81,
+                topic: "Tick-Borne Disease",
+                question: "Which tick species is responsible for transmitting Lyme disease, Anaplasmosis, and Babesiosis?",
+                options: ["Lone Star Tick (*Amblyomma americanum*)", "Deer Tick (*Ixodes scapularis*)", "American Dog Tick (*Dermacentor variabilis*)", "Brown Dog Tick"],
+                answer: 1,
+                rationale: "Lyme disease, Anaplasmosis, and Babesiosis are spread by the Deer Tick (*Ixodes scapularis*)."
+            },
+            {
+                id: 82,
+                topic: "Tick-Borne Disease",
+                question: "Which tick species transmits Ehrlichiosis?",
+                options: ["Deer Tick", "Lone Star Tick (*Amblyomma americanum*)", "Wood Tick", "Ixodes cookei"],
+                answer: 1,
+                rationale: "Ehrlichiosis is spread by the Lone Star tick (*Amblyomma americanum*)."
+            },
+            {
+                id: 83,
+                topic: "Tick-Borne Disease",
+                question: "When does tick season typically peak in New Jersey?",
+                options: ["Mid-winter (January and February)", "Late spring and early-to-mid summer (May, June, July)", "Late autumn (November)", "Tick activity is equal all 12 months"],
+                answer: 1,
+                rationale: "Tick season in NJ typically begins at the end of spring and beginning to mid-summer (May, June, July)."
+            },
+            {
+                id: 84,
+                topic: "Tick-Borne Disease",
+                question: "What is the proper procedure for removing an attached tick from skin?",
+                options: ["Burn it off with a match", "Grasp with tweezers close to attachment site and pull upward with steady pressure", "Cover it with nail polish or Vaseline", "Twist it rapidly until it tears"],
+                answer: 1,
+                rationale: "Grasp with tweezers or forceps as close as possible to attachment site, pull upward and out with a firm and steady pressure."
+            },
+            {
+                id: 85,
+                topic: "Tick-Borne Disease",
+                question: "If tweezers are unavailable, what safety precaution must be taken when removing a tick with fingers?",
+                options: ["Use bare hands without touching skin", "Shield fingers with tissue paper or rubber gloves and avoid squeezing the body", "Use oil on fingers first", "Soak fingers in hot water"],
+                answer: 1,
+                rationale: "Use fingers shielded with tissue paper or rubber gloves. Do not handle with bare hands. Be careful not to squeeze or crush the tick body."
+            },
+            {
+                id: 86,
+                topic: "Tick-Borne Disease",
+                question: "What laundry practice kills ticks on outdoor clothing according to the guide?",
+                options: ["Washing in cold water for 5 minutes", "Putting dry clothes directly into the dryer on high heat for 10 minutes", "Soaking clothes in vinegar", "Hanging clothes outdoors in shade"],
+                answer: 1,
+                rationale: "Put clothes in dryer (without washing) for 10 minutes to kill any ticks that may be on your clothes."
+            },
+            {
+                id: 87,
+                topic: "Tick-Borne Disease",
+                question: "Why is wearing light-colored clothing recommended during tick season?",
+                options: ["Light colors repel ticks naturally", "Light colors help you spot crawling ticks more easily", "Light colors keep ticks cool so they don't bite", "Light colors block UV rays"],
+                answer: 1,
+                rationale: "Wear light-colored clothes to help you spot any ticks that might be crawling on you."
+            },
+            {
+                id: 88,
+                topic: "Tick-Borne Disease",
+                question: "Which chemical treatment for clothing provides barrier protection against ticks?",
+                options: ["Permethrin", "Chlorine bleach", "Isopropanol", "DEET liquid soap"],
+                answer: 0,
+                rationale: "The guide suggests considering wearing clothes pre-treated with permethrin."
+            },
+            {
+                id: 89,
+                topic: "Tick-Borne Disease",
+                question: "Which neurological sign is specifically listed as a potential symptom of tick-borne diseases like Lyme?",
+                options: ["Facial paralysis", "Loss of speech", "Tremors in knees", "Seizures"],
+                answer: 0,
+                rationale: "Common symptoms of tick-borne diseases include fatigue, body aches, rash, stiff neck, and facial paralysis."
+            },
+
+            // TUBERCULOSIS (90-95)
+            {
+                id: 90,
+                topic: "Tuberculosis",
+                question: "What bacterium causes Tuberculosis (TB)?",
+                options: ["*Mycobacterium tuberculosis*", "*Streptococcus pyogenes*", "*Bacillus anthracis*", "*Clostridium tetani*"],
+                answer: 0,
+                rationale: "Tuberculosis is caused by a bacteria called *Mycobacterium tuberculosis*."
+            },
+            {
+                id: 91,
+                topic: "Tuberculosis",
+                question: "How is TB bacteria transmitted between individuals?",
+                options: ["Through contaminated food", "Through the air when an infected person coughs, speaks, or breathes", "Through mosquito bites", "Through direct skin contact"],
+                answer: 1,
+                rationale: "TB bacteria can be transmitted through the air from one person to another when an infected person coughs, speaks, or breathes."
+            },
+            {
+                id: 92,
+                topic: "Tuberculosis",
+                question: "What duration of bad cough is considered a key symptom indicating pulmonary TB disease?",
+                options: ["Cough lasting 24 hours", "Cough lasting 3 weeks or longer", "Cough only in the morning", "Cough lasting 3 days"],
+                answer: 1,
+                rationale: "TB disease in the lungs may cause symptoms such as a bad cough that lasts 3 weeks or longer."
+            },
+            {
+                id: 93,
+                topic: "Tuberculosis",
+                question: "Which statement accurately describes an individual with LATENT TB infection?",
+                options: ["They are highly contagious and cough blood", "They do not feel sick, have no symptoms, and cannot spread TB to others", "They require immediate quarantine in ICU", "They have visible skin lesions"],
+                answer: 1,
+                rationale: "People who have latent TB infection do not feel sick, do not have any symptoms, and cannot spread TB to others."
+            },
+            {
+                id: 94,
+                topic: "Tuberculosis",
+                question: "What environmental factor helps kill TB bacteria in indoor environments?",
+                options: ["Humidifiers", "Natural UV light (sunlight)", "Complete darkness", "High humidity"],
+                answer: 1,
+                rationale: "Natural light / UV light kills off TB bacteria."
+            },
+            {
+                id: 95,
+                topic: "Tuberculosis",
+                question: "Why is good room ventilation crucial in preventing the spread of TB?",
+                options: ["TB dies in cold breeze", "TB bacteria can remain suspended in stagnant air for several hours without ventilation", "Ventilation destroys TB vaccines", "TB cannot spread if windows are closed"],
+                answer: 1,
+                rationale: "Good ventilation is important as TB can remain suspended in the air for several hours with no ventilation."
+            },
+
+            // VIRAL HEPATITIS & WEST NILE VIRUS (96-100)
+            {
+                id: 96,
+                topic: "Viral Hepatitis",
+                question: "How is Hepatitis A virus primarily spread?",
+                options: ["Inhaling dust particles", "Ingesting the virus through close personal contact or contaminated food/drink", "Mosquito vectors", "Blood transfusion only"],
+                answer: 1,
+                rationale: "Hepatitis A virus is spread when someone ingests the virus through close contact or contaminated food/drink."
+            },
+            {
+                id: 97,
+                topic: "Viral Hepatitis",
+                question: "Vaccines are currently available to prevent which types of viral hepatitis?",
+                options: ["Hepatitis A and Hepatitis B", "Hepatitis C only", "Hepatitis B and C", "All types of Hepatitis"],
+                answer: 0,
+                rationale: "The document recommends getting vaccines for Hepatitis A and Hepatitis B. (No vaccine exists for Hepatitis C)."
+            },
+            {
+                id: 98,
+                topic: "West Nile Virus",
+                question: "How do mosquitoes become infected with West Nile Virus (WNV) prior to biting humans?",
+                options: ["By feeding on infected birds", "By breeding in stagnant chemical water", "By feeding on rabid bats", "By consuming plant sap"],
+                answer: 0,
+                rationale: "Mosquitoes become infected when they feed on infected birds, and then spread WNV to humans."
+            },
+            {
+                id: 99,
+                topic: "West Nile Virus",
+                question: "What percentage of people infected with West Nile Virus show NO symptoms at all?",
+                options: ["10 percent", "50 percent", "Approximately 80 percent", "100 percent"],
+                answer: 2,
+                rationale: "Approximately 80 percent of people who are infected with WNV will not show any symptoms at all."
+            },
+            {
+                id: 100,
+                topic: "West Nile Virus",
+                question: "Which of the following insect repellents is explicitly listed by the CDC for preventing mosquito bites?",
+                options: ["DEET, picaridin, IR3535, or oil of lemon eucalyptus", "Citronella candle wax only", "Peppermint essential oil", "Rubbing alcohol"],
+                answer: 0,
+                rationale: "When outdoors, use repellents containing DEET, picaridin, IR3535, some oil of lemon eucalyptus or paramenthane-diol."
+            }
+        ];
+
+        // --- APP STATE VARIABLES ---
+        let activeQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = {}; // { questionId: selectedIndex }
+        let flaggedQuestions = new Set();
+        let timerInterval = null;
+        let totalSeconds = 0;
+        let quizMode = 'full';
+        let instantFeedback = true;
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedState();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            document.getElementById('themeToggle').addEventListener('click', toggleDarkMode);
+            document.getElementById('resetAppBtn').addEventListener('click', resetAllProgress);
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function resetAllProgress() {
+            if (confirm("Are you sure you want to reset all test progress and saved answers?")) {
+                localStorage.removeItem('communicable_disease_quiz_state');
+                location.reload();
+            }
+        }
+
+        // --- START QUIZ MODES ---
+        function startQuiz(mode) {
+            quizMode = mode;
+            instantFeedback = document.getElementById('instantFeedbackToggle').checked;
+            const shuffle = document.getElementById('shuffleOptionsToggle').checked;
+
+            let source = [...ALL_QUESTIONS];
+
+            if (mode === 'quick') {
+                const len = parseInt(document.getElementById('quickLength').value);
+                source = shuffleArray(source).slice(0, len);
+            } else if (mode === 'topic') {
+                const selectedTopic = document.getElementById('topicSelect').value;
+                if (selectedTopic !== 'All') {
+                    source = source.filter(q => q.topic === selectedTopic);
+                }
+            }
+
+            if (shuffle && mode !== 'quick') {
+                source = shuffleArray(source);
+            }
+
+            if (source.length === 0) {
+                alert("No questions found for the selected topic!");
+                return;
+            }
+
+            activeQuestions = source;
+            currentIndex = 0;
+            userAnswers = {};
+            flaggedQuestions.clear();
+            totalSeconds = 0;
+
+            // Show Quiz UI
+            document.getElementById('setupScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+
+            startTimer();
+            renderQuestionGrid();
+            renderCurrentQuestion();
+        }
+
+        // --- TIMER ---
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                totalSeconds++;
+                const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+                const secs = String(totalSeconds % 60).padStart(2, '0');
+                document.getElementById('timerDisplay').innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        // --- RENDER QUESTION ---
+        function renderCurrentQuestion() {
+            const q = activeQuestions[currentIndex];
+            if (!q) return;
+
+            // Progress & Counters
+            document.getElementById('questionCounter').innerText = `Question ${currentIndex + 1} of ${activeQuestions.length}`;
+            document.getElementById('diseaseBadge').innerText = q.topic;
+            
+            const progressPercent = ((currentIndex + 1) / activeQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+            // Update Flag Icon
+            const flagBtn = document.getElementById('flagBtn');
+            if (flaggedQuestions.has(q.id)) {
+                flagBtn.className = "p-2 rounded-lg border border-amber-300 bg-amber-50 dark:bg-amber-950/50 text-amber-500 transition";
+            } else {
+                flagBtn.className = "p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-amber-500 transition";
+            }
+
+            // Question text
+            document.getElementById('questionText').innerText = `${currentIndex + 1}. ${q.question}`;
+
+            // Options Container
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            const selectedAns = userAnswers[q.id];
+            const hasAnswered = selectedAns !== undefined;
+
+            q.options.forEach((optText, optIdx) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = getOptionStyle(q, optIdx, selectedAns, hasAnswered);
+                
+                optionBtn.innerHTML = `
+                    <div class="flex items-center space-x-3 text-left">
+                        <span class="w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs border border-current shrink-0">
+                            ${String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span class="text-xs sm:text-sm font-medium leading-normal">${optText}</span>
+                    </div>
+                `;
+
+                if (!hasAnswered) {
+                    optionBtn.onclick = () => selectOption(optIdx);
+                }
+
+                container.appendChild(optionBtn);
+            });
+
+            // Rationale Box
+            const rationaleBox = document.getElementById('rationaleBox');
+            if (hasAnswered && instantFeedback) {
+                rationaleBox.classList.remove('hidden');
+                const isCorrect = selectedAns === q.answer;
+
+                if (isCorrect) {
+                    rationaleBox.className = "p-4 rounded-xl border bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 space-y-1 text-xs sm:text-sm";
+                    document.getElementById('rationaleIcon').className = "fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400";
+                    document.getElementById('rationaleTitle').innerText = "Correct!";
+                } else {
+                    rationaleBox.className = "p-4 rounded-xl border bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800 text-red-900 dark:text-red-200 space-y-1 text-xs sm:text-sm";
+                    document.getElementById('rationaleIcon').className = "fa-solid fa-circle-xmark text-red-600 dark:text-red-400";
+                    document.getElementById('rationaleTitle').innerText = "Incorrect";
+                }
+                document.getElementById('rationaleText').innerText = q.rationale;
+            } else {
+                rationaleBox.classList.add('hidden');
+            }
+
+            // Prev / Next button state
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('prevBtn').style.opacity = currentIndex === 0 ? "0.5" : "1";
+
+            const nextBtn = document.getElementById('nextBtn');
+            if (currentIndex === activeQuestions.length - 1) {
+                nextBtn.innerHTML = `<span>Submit Test</span> <i class="fa-solid fa-check"></i>`;
+                nextBtn.className = "px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-xs sm:text-sm shadow transition flex items-center space-x-2";
+            } else {
+                nextBtn.innerHTML = `<span>Next Question</span> <i class="fa-solid fa-arrow-right"></i>`;
+                nextBtn.className = "px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg font-semibold text-xs sm:text-sm shadow transition flex items-center space-x-2";
+            }
+
+            updateQuestionGrid();
+            saveState();
+        }
+
+        function getOptionStyle(q, optIdx, selectedAns, hasAnswered) {
+            const base = "w-full p-3.5 rounded-xl border text-left transition duration-150 flex items-center justify-between ";
+
+            if (!hasAnswered) {
+                return base + "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-slate-700/60 hover:border-brand-300 text-slate-800 dark:text-slate-200";
+            }
+
+            if (instantFeedback) {
+                if (optIdx === q.answer) {
+                    return base + "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-500 text-emerald-900 dark:text-emerald-200 font-semibold";
+                }
+                if (optIdx === selectedAns) {
+                    return base + "bg-red-50 dark:bg-red-950/50 border-red-500 text-red-900 dark:text-red-200";
+                }
+                return base + "bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700 text-slate-400 opacity-60";
+            } else {
+                if (optIdx === selectedAns) {
+                    return base + "bg-brand-50 dark:bg-brand-950/50 border-brand-500 text-brand-900 dark:text-brand-200 font-semibold";
+                }
+                return base + "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300";
+            }
+        }
+
+        // --- ACTION HANDLERS ---
+        function selectOption(optIdx) {
+            const q = activeQuestions[currentIndex];
+            userAnswers[q.id] = optIdx;
+            renderCurrentQuestion();
+        }
+
+        function navigateQuestion(step) {
+            if (step === 1 && currentIndex === activeQuestions.length - 1) {
+                finishQuiz();
+                return;
+            }
+            const newIndex = currentIndex + step;
+            if (newIndex >= 0 && newIndex < activeQuestions.length) {
+                currentIndex = newIndex;
+                renderCurrentQuestion();
+            }
+        }
+
+        function jumpToQuestion(idx) {
+            currentIndex = idx;
+            renderCurrentQuestion();
+        }
+
+        function toggleFlagCurrentQuestion() {
+            const q = activeQuestions[currentIndex];
+            if (flaggedQuestions.has(q.id)) {
+                flaggedQuestions.delete(q.id);
+            } else {
+                flaggedQuestions.add(q.id);
+            }
+            renderCurrentQuestion();
+        }
+
+        // --- SIDEBAR GRID MAP ---
+        function renderQuestionGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = '';
+
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `grid-btn-${idx}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => jumpToQuestion(idx);
+                grid.appendChild(btn);
+            });
+
+            updateQuestionGrid();
+        }
+
+        function updateQuestionGrid() {
+            let answeredCount = 0;
+
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.getElementById(`grid-btn-${idx}`);
+                if (!btn) return;
+
+                const isCurrent = idx === currentIndex;
+                const isAnswered = userAnswers[q.id] !== undefined;
+                const isFlagged = flaggedQuestions.has(q.id);
+                const isCorrect = isAnswered && userAnswers[q.id] === q.answer;
+
+                if (isAnswered) answeredCount++;
+
+                let style = "w-full aspect-square rounded-lg font-bold text-xs flex items-center justify-center transition border ";
+
+                if (isCurrent) {
+                    style += "ring-2 ring-brand-500 ring-offset-2 dark:ring-offset-slate-800 ";
+                }
+
+                if (isFlagged) {
+                    style += "bg-amber-400 text-slate-900 border-amber-500 ";
+                } else if (isAnswered) {
+                    if (instantFeedback) {
+                        style += isCorrect ? "bg-emerald-500 text-white border-emerald-600 " : "bg-red-500 text-white border-red-600 ";
+                    } else {
+                        style += "bg-brand-600 text-white border-brand-700 ";
+                    }
+                } else {
+                    style += "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-600 hover:bg-slate-200 ";
+                }
+
+                btn.className = style;
+            });
+
+            document.getElementById('answeredCountBadge').innerText = `${answeredCount} / ${activeQuestions.length} Answered`;
+        }
+
+        // --- FINISH & SCORE CALCULATIONS ---
+        function finishQuiz() {
+            stopTimer();
+
+            let correctCount = 0;
+            const categoryStats = {};
+
+            activeQuestions.forEach(q => {
+                const userAns = userAnswers[q.id];
+                const isCorrect = userAns === q.answer;
+
+                if (isCorrect) correctCount++;
+
+                if (!categoryStats[q.topic]) {
+                    categoryStats[q.topic] = { total: 0, correct: 0 };
+                }
+                categoryStats[q.topic].total++;
+                if (isCorrect) categoryStats[q.topic].correct++;
+            });
+
+            const percentage = Math.round((correctCount / activeQuestions.length) * 100);
+
+            // Display Top Scores
+            document.getElementById('finalScoreDisplay').innerText = `${percentage}%`;
+            document.getElementById('correctCountDisplay').innerText = `${correctCount} / ${activeQuestions.length}`;
+            
+            const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+            const secs = String(totalSeconds % 60).padStart(2, '0');
+            document.getElementById('totalTimeDisplay').innerText = `${mins}:${secs}`;
+
+            // Render Topic Breakdown
+            const breakdownContainer = document.getElementById('categoryBreakdownContainer');
+            breakdownContainer.innerHTML = '';
+
+            Object.keys(categoryStats).forEach(topic => {
+                const stat = categoryStats[topic];
+                const topicPct = Math.round((stat.correct / stat.total) * 100);
+
+                const div = document.createElement('div');
+                div.className = "p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/30 flex items-center justify-between";
+                div.innerHTML = `
+                    <span class="font-medium text-slate-700 dark:text-slate-300">${topic}</span>
+                    <span class="font-bold ${topicPct >= 75 ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}">${stat.correct}/${stat.total} (${topicPct}%)</span>
+                `;
+                breakdownContainer.appendChild(div);
+            });
+
+            // Render Review Items
+            renderReviewItems('all');
+
+            // Switch screens
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+        }
+
+        function renderReviewItems(filter) {
+            const container = document.getElementById('reviewItemsContainer');
+            container.innerHTML = '';
+
+            // Active button states
+            document.getElementById('filterAllBtn').className = filter === 'all' ? "px-3 py-1 bg-brand-600 text-white rounded-lg font-medium" : "px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium";
+            document.getElementById('filterIncorrectBtn').className = filter === 'incorrect' ? "px-3 py-1 bg-brand-600 text-white rounded-lg font-medium" : "px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium";
+            document.getElementById('filterFlaggedBtn').className = filter === 'flagged' ? "px-3 py-1 bg-brand-600 text-white rounded-lg font-medium" : "px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium";
+
+            activeQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[q.id];
+                const isCorrect = userAns === q.answer;
+                const isFlagged = flaggedQuestions.has(q.id);
+
+                if (filter === 'incorrect' && isCorrect) return;
+                if (filter === 'flagged' && !isFlagged) return;
+
+                const card = document.createElement('div');
+                card.className = `p-5 rounded-xl border text-xs sm:text-sm space-y-3 bg-white dark:bg-slate-800 ${isCorrect ? 'border-slate-200 dark:border-slate-700' : 'border-red-200 dark:border-red-900/50'}`;
+
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    let optStyle = "p-2.5 rounded-lg border flex items-center justify-between ";
+                    if (optIdx === q.answer) {
+                        optStyle += "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 text-emerald-900 dark:text-emerald-200 font-medium";
+                    } else if (optIdx === userAns && !isCorrect) {
+                        optStyle += "bg-red-50 dark:bg-red-950/40 border-red-300 text-red-900 dark:text-red-200";
+                    } else {
+                        optStyle += "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 opacity-75";
+                    }
+
+                    optionsHTML += `
+                        <div class="${optStyle}">
+                            <span>${String.fromCharCode(65 + optIdx)}. ${opt}</span>
+                            ${optIdx === q.answer ? '<i class="fa-solid fa-check text-emerald-600"></i>' : ''}
+                            ${optIdx === userAns && !isCorrect ? '<i class="fa-solid fa-xmark text-red-600"></i>' : ''}
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-slate-500">Q${idx + 1} • ${q.topic}</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isCorrect ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300' : 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300'}">
+                            ${isCorrect ? 'Correct' : 'Incorrect'}
+                        </span>
+                    </div>
+                    <p class="font-semibold text-slate-900 dark:text-white">${q.question}</p>
+                    <div class="space-y-2 py-1">${optionsHTML}</div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/40 rounded-lg text-slate-700 dark:text-slate-300 leading-relaxed border border-slate-200 dark:border-slate-700 text-xs">
+                        <strong class="text-brand-600 dark:text-brand-400">Rationale:</strong> ${q.rationale}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function filterReview(filter) {
+            renderReviewItems(filter);
+        }
+
+        function retakeQuiz() {
+            startQuiz(quizMode);
+        }
+
+        function showSetupScreen() {
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('setupScreen').classList.remove('hidden');
+        }
+
+        // --- UTILS ---
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function saveState() {
+            const state = {
+                activeQuestions,
+                currentIndex,
+                userAnswers,
+                flaggedQuestions: Array.from(flaggedQuestions),
+                totalSeconds,
+                quizMode,
+                instantFeedback
+            };
+            localStorage.setItem('communicable_disease_quiz_state', JSON.stringify(state));
+        }
+
+        function loadSavedState() {
+            const saved = localStorage.getItem('communicable_disease_quiz_state');
+            if (!saved) return;
+            try {
+                const data = JSON.parse(saved);
+                if (data.activeQuestions && data.activeQuestions.length > 0) {
+                    activeQuestions = data.activeQuestions;
+                    currentIndex = data.currentIndex || 0;
+                    userAnswers = data.userAnswers || {};
+                    flaggedQuestions = new Set(data.flaggedQuestions || []);
+                    totalSeconds = data.totalSeconds || 0;
+                    quizMode = data.quizMode || 'full';
+                    instantFeedback = data.instantFeedback !== undefined ? data.instantFeedback : true;
+                }
+            } catch (e) {
+                console.error("Failed to restore saved progress:", e);
+            }
+        }
+    </script>
+</body>
+</html>
